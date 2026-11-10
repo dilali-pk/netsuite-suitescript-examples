@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+# SuiteCloud CLI local auth / project settings
+project.json
+.suitecloud/
