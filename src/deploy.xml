@@ -1,0 +1,5 @@
+<deploy>
+    <files>
+        <path>~/FileCabinet/*</path>
+    </files>
+</deploy>
