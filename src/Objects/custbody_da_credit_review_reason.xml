@@ -1,0 +1,13 @@
+<transactionbodycustomfield scriptid="custbody_da_credit_review_reason">
+  <accesslevel>2</accesslevel>
+  <bodysale>T</bodysale>
+  <description>Why the order was routed to credit review: exposure over the limit, overdue age past the grace period, or both. Kept current by DA Credit Review; empty when the order is clear.</description>
+  <displaytype>INLINE</displaytype>
+  <fieldtype>TEXTAREA</fieldtype>
+  <help>Reasons this order needs finance approval. Empty when the customer is within terms.</help>
+  <ismandatory>F</ismandatory>
+  <label>Credit Review Reason</label>
+  <searchlevel>2</searchlevel>
+  <showinlist>T</showinlist>
+  <storevalue>T</storevalue>
+</transactionbodycustomfield>

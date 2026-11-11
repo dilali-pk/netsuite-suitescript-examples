@@ -1,0 +1,59 @@
+<usereventscript scriptid="customscript_da_ue_credit_review">
+  <description>Routes new sales orders to Pending Approval with a written reason when exposure or overdue age crosses the finance limits.</description>
+  <isinactive>F</isinactive>
+  <name>DA Credit Review</name>
+  <notifyadmins>F</notifyadmins>
+  <notifyemails></notifyemails>
+  <notifyowner>T</notifyowner>
+  <notifyuser>F</notifyuser>
+  <scriptfile>[/SuiteScripts/DA/CreditReview/DA_UE_Credit_Review.js]</scriptfile>
+  <scriptcustomfields>
+    <scriptcustomfield scriptid="custscript_da_cr_grace_days">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultvalue>15</defaultvalue>
+      <description>Days an invoice may be overdue before new orders go to credit review.</description>
+      <displaytype>NORMAL</displaytype>
+      <fieldtype>INTEGER</fieldtype>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Grace days</label>
+      <searchlevel>2</searchlevel>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+    <scriptcustomfield scriptid="custscript_da_cr_tolerance">
+      <accesslevel>2</accesslevel>
+      <applyformatting>F</applyformatting>
+      <checkspelling>F</checkspelling>
+      <defaultchecked>F</defaultchecked>
+      <defaultvalue>5</defaultvalue>
+      <description>Percent over the credit limit tolerated before review.</description>
+      <displaytype>NORMAL</displaytype>
+      <fieldtype>FLOAT</fieldtype>
+      <isformula>F</isformula>
+      <ismandatory>F</ismandatory>
+      <label>Tolerance percent</label>
+      <searchlevel>2</searchlevel>
+      <storevalue>T</storevalue>
+    </scriptcustomfield>
+  </scriptcustomfields>
+  <scriptdeployments>
+    <scriptdeployment scriptid="customdeploy_da_ue_credit_review">
+      <allemployees>F</allemployees>
+      <alllocalizationcontexts>T</alllocalizationcontexts>
+      <allpartners>F</allpartners>
+      <allroles>T</allroles>
+      <audslctrole></audslctrole>
+      <custscript_da_cr_grace_days>15</custscript_da_cr_grace_days>
+      <custscript_da_cr_tolerance>5</custscript_da_cr_tolerance>
+      <eventtype></eventtype>
+      <executioncontext>CSVIMPORT|RESTLET|RESTWEBSERVICES|SUITELET|USERINTERFACE|WEBSERVICES|WEBSTORE</executioncontext>
+      <isdeployed>T</isdeployed>
+      <loglevel>AUDIT</loglevel>
+      <recordtype>SALESORDER</recordtype>
+      <status>TESTING</status>
+    </scriptdeployment>
+  </scriptdeployments>
+</usereventscript>

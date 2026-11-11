@@ -1,0 +1,30 @@
+.da-minimum-order {
+    margin: $sc-margin-lv3 0;
+    padding: $sc-padding-lv3;
+    border: 1px solid $sc-color-theme-border;
+    border-radius: 4px;
+    background: $sc-color-theme-background;
+
+    &__text {
+        margin: 0 0 $sc-margin-lv2;
+        font-size: $sc-font-size-s;
+    }
+
+    &__bar {
+        height: 6px;
+        border-radius: 3px;
+        background: $sc-neutral-shade-300;
+        overflow: hidden;
+    }
+
+    &__fill {
+        display: block;
+        height: 100%;
+        background: $sc-color-warning;
+        transition: width 0.3s ease;
+    }
+
+    &.is-reached &__fill {
+        background: $sc-color-success;
+    }
+}

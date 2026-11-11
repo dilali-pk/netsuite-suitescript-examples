@@ -1,0 +1,44 @@
+{
+    "name": "MinimumOrder",
+    "fantasyName": "Minimum Order Notice",
+    "vendor": "DA",
+    "version": "1.0.0",
+    "type": "extension",
+    "target": "SCA,SCS",
+    "target_version": {
+        "SCA": ">=2020.2.0",
+        "SCS": ">=20.2.0"
+    },
+    "description": "Shows shoppers how far their cart is from the minimum order amount, live as the cart changes.",
+    "skins": [],
+    "templates": {
+        "application": {
+            "shopping": {
+                "files": ["Modules/MinimumOrder/Templates/da_minimum_order.tpl"]
+            }
+        }
+    },
+    "javascript": {
+        "entry_points": {
+            "shopping": "Modules/MinimumOrder/JavaScript/DA.MinimumOrder.js"
+        },
+        "application": {
+            "shopping": {
+                "files": [
+                    "Modules/MinimumOrder/JavaScript/DA.MinimumOrder.js",
+                    "Modules/MinimumOrder/JavaScript/DA.MinimumOrder.View.js"
+                ]
+            }
+        }
+    },
+    "sass": {
+        "entry_points": {
+            "shopping": "Modules/MinimumOrder/Sass/_da-minimum-order.scss"
+        },
+        "files": ["Modules/MinimumOrder/Sass/_da-minimum-order.scss"]
+    },
+    "configuration": {
+        "files": ["Modules/MinimumOrder/Configuration/MinimumOrder.json"]
+    },
+    "local_folder": "Workspace/MinimumOrder"
+}

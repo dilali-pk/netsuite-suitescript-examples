@@ -1,0 +1,131 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<!--
+  Packing slip, Advanced PDF/HTML template (FreeMarker).
+  Header and footer repeat on every page, the order number prints as a
+  scannable Code 128 barcode, rows shade alternately, and the slip ends
+  with a unit total and pick and check sign off boxes.
+  Author: Dilshad Ali
+-->
+<pdf>
+<head>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header">
+                <tr>
+                    <td style="width: 55%;">
+                        <#if companyInformation.logoUrl?has_content>
+                            <img src="${companyInformation.logoUrl}" style="height: 44px;" />
+                        </#if>
+                        <p class="company">${companyInformation.companyName}</p>
+                        <p class="muted">${companyInformation.addressText}</p>
+                    </td>
+                    <td style="width: 45%;" align="right">
+                        <p class="title">Packing Slip</p>
+                        <barcode codetype="code128" showtext="true" value="${record.tranid}" />
+                    </td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="muted">${record.tranid}</td>
+                    <td class="muted" align="right">Page <pagenumber/> of <totalpages/></td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">
+        * { font-family: NotoSans, sans-serif; }
+        body { font-size: 9pt; color: #222222; }
+        p { margin: 0; }
+        table.header { width: 100%; }
+        .company { font-size: 12pt; font-weight: bold; margin-top: 4px; }
+        .title { font-size: 18pt; font-weight: bold; margin-bottom: 6px; }
+        .muted { color: #666666; font-size: 8pt; }
+        .label { color: #666666; font-size: 7.5pt; font-weight: bold; text-transform: uppercase; margin-bottom: 2px; }
+        table.meta { width: 100%; margin-top: 10px; }
+        table.meta td { padding-right: 12px; vertical-align: top; }
+        table.items { width: 100%; margin-top: 18px; }
+        table.items th { background-color: #1f2d3d; color: #ffffff; font-weight: bold; padding: 6px; }
+        table.items td { padding: 6px; border-bottom: 1px solid #e3e6ea; }
+        td.alt { background-color: #f5f7f9; }
+        td.total { font-weight: bold; border-top: 1.5px solid #1f2d3d; }
+        table.signoff { width: 100%; margin-top: 28px; }
+        table.signoff td { border-top: 1px solid #999999; padding-top: 4px; width: 30%; }
+    </style>
+</head>
+<body header="nlheader" header-height="120pt" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+
+    <table class="meta">
+        <tr>
+            <td style="width: 34%;">
+                <p class="label">Ship to</p>
+                <p>${record.shipaddress}</p>
+            </td>
+            <td style="width: 26%;">
+                <p class="label">Bill to</p>
+                <p>${record.billaddress}</p>
+            </td>
+            <td style="width: 20%;">
+                <p class="label">Ship date</p>
+                <p>${record.trandate}</p>
+                <p class="label" style="margin-top: 8px;">Order</p>
+                <p>${record.createdfrom}</p>
+            </td>
+            <td style="width: 20%;">
+                <p class="label">Ship via</p>
+                <p>${record.shipmethod}</p>
+                <#if record.otherrefnum?has_content>
+                <p class="label" style="margin-top: 8px;">Customer PO</p>
+                <p>${record.otherrefnum}</p>
+                </#if>
+            </td>
+        </tr>
+    </table>
+
+    <#if record.item?has_content>
+    <#assign totalUnits = 0>
+    <table class="items">
+        <#list record.item as line>
+        <#if line_index == 0>
+        <thead>
+            <tr>
+                <th align="left" colspan="5">Item</th>
+                <th align="left" colspan="11">Description</th>
+                <th align="right" colspan="3">Shipped</th>
+            </tr>
+        </thead>
+        </#if>
+        <#assign rowClass = (line_index % 2 == 1)?string("alt", "")>
+        <#assign totalUnits = totalUnits + line.quantity>
+        <tr>
+            <td class="${rowClass}" colspan="5">${line.item}</td>
+            <td class="${rowClass}" colspan="11">${line.description}</td>
+            <td class="${rowClass}" colspan="3" align="right">${line.quantity}</td>
+        </tr>
+        </#list>
+        <tr>
+            <td class="total" colspan="16" align="right">Total units</td>
+            <td class="total" colspan="3" align="right">${totalUnits}</td>
+        </tr>
+    </table>
+    </#if>
+
+    <#if record.memo?has_content>
+    <p class="label" style="margin-top: 20px;">Notes</p>
+    <p>${record.memo}</p>
+    </#if>
+
+    <table class="signoff">
+        <tr>
+            <td><p class="muted">Picked by</p></td>
+            <td style="width: 5%; border-top: 0;"></td>
+            <td><p class="muted">Checked by</p></td>
+            <td style="width: 5%; border-top: 0;"></td>
+            <td><p class="muted">Date</p></td>
+        </tr>
+    </table>
+
+</body>
+</pdf>

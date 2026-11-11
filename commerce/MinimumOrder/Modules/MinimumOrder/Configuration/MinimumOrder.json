@@ -1,0 +1,18 @@
+{
+    "type": "object",
+    "subtab": {
+        "id": "daMinimumOrder",
+        "title": "Minimum Order",
+        "group": "shoppingApplication"
+    },
+    "properties": {
+        "daMinimumOrder.amount": {
+            "group": "shoppingApplication",
+            "subtab": "daMinimumOrder",
+            "type": "number",
+            "title": "Minimum order subtotal",
+            "description": "Cart subtotal at which the notice turns green. 0 turns the notice off.",
+            "default": 100
+        }
+    }
+}
